@@ -4,14 +4,14 @@ body
         h1 List
         table.table.table-responsive.table-hover.table-striped.table-dark
             thead
-                tr
-                    th(scope="col") ID
-                    th(scope="col") Event Name
-                    th(scope="col") Event DateTime
-                    th(scope="col") Venue
-                    th(scope="col") Contact Phone
-                    th(scope="col") Seat
-                    th(scope="col") Actions
+            tr
+                th(scope="col") ID
+                th(scope="col") Event Name
+                th(scope="col") Event DateTime
+                th(scope="col") Venue
+                th(scope="col") Contact Phone
+                th(scope="col") Seat
+                th(scope="col") Actions
             tbody
 script.
         document.addEventListener('DOMContentLoaded', function() {
@@ -20,24 +20,24 @@ script.
                     const events = response.data;
                     const tableBody = document.querySelector('table tbody');
                     events.forEach(t => {
-                        const row = document.createElement('tr');
-                        const event = t.event
-                        row.innerHTML = `
-                            <td>${t.id}</td>
-                            <td>${event.eventName}</td>
-                            <td>${event.eventDateTime}</td>
-                            <td>${event.venue}</td>
-                            <td>${event.contactPhone}</td>
-                            <td>${event.seat}</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm">Edit</button>
-                                <button class="btn btn-danger btn-sm">Delete</button>
-                            </td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
+                    const row = document.createElement('tr');
+                    const event = t.event
+                    row.innerHTML = `
+                        <td>${t.id}</td>
+                        <td>${event.eventName}</td>
+                        <td>${event.eventDateTime}</td>
+                        <td>${event.venue}</td>
+                        <td>${event.contactPhone}</td>
+                        <td>${event.seat}</td>
+                        <td>
+                        <button class="btn btn-primary btn-sm">Edit</button>
+                        <button class="btn btn-danger btn-sm">Delete</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
                 })
                 .catch(function(error) {
-                    console.log(error);
+                console.log(error);
                 });
         });
