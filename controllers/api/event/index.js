@@ -11,6 +11,15 @@ const event_controller = {
             event_service.create(req, res)
         )
     },
+    update(req, res) {
+        const event = event_service.update(req.params.id, req.body)
+        
+        if (event) {
+            res.json(event)
+        } else {
+            res.status(404).send('event not found')
+        }
+    },
     delete(req, res) {
         const event = event_service.getById(req.params.id)
         

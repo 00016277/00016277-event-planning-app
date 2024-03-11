@@ -1,25 +1,28 @@
 include ../head.pug
 body
     .container.mt-5
-        h1 List
+        .row.d-flex.align-items-center
+            .col-md-6
+                h1 List
+            .col-md-6.text-end
+                a.btn.btn-success(href='/add', role='button') Add      
         table.table.table-responsive.table-hover.table-striped.table-dark
             thead
-            tr
-                th(scope="col") ID
-                th(scope="col") Event Name
-                th(scope="col") Event DateTime
-                th(scope="col") Venue
-                th(scope="col") Contact Phone
-                th(scope="col") Seat
-                th(scope="col") Actions
+                tr
+                    th(scope="col") ID
+                    th(scope="col") Event Name
+                    th(scope="col") Event DateTime
+                    th(scope="col") Venue
+                    th(scope="col") Contact Phone
+                    th(scope="col") Seat
+                    th(scope="col") Actions
             tbody
 script.
-        document.addEventListener('DOMContentLoaded', function() {
-            axios.get('/api/event')
-            .then(function(response) {
-                const events = response.data;
-                const tableBody = document.querySelector('table tbody');
-                events.forEach(t => {
+    document.addEventListener('DOMContentLoaded', function() {
+        axios.get('/api/event').then(function(response) {
+            const events = response.data;
+            const tableBody = document.querySelector('table tbody');
+            events.forEach(t => {
                 const row = document.createElement('tr');
                 const event = t.event
                 row.innerHTML = `
@@ -30,8 +33,8 @@ script.
                     <td>${event.contactPhone}</td>
                     <td>${event.seat}</td>
                     <td>
-                    <button class="btn btn-primary btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
+                        <button class="btn btn-primary btn-sm" data-id="${t.id}" onclick="window.location.href='/update/${t.id}'">Update</button>
+                        <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -41,17 +44,18 @@ script.
                 console.log(error);
             });
 
-          // Use event delegation for delete buttons
-            document.addEventListener('click', function(event) {
-                if (event.target && event.target.classList.contains('btn-danger')) {
-                const eventId = event.target.getAttribute('data-id');
+    // Use event delegation for delete buttons
+    document.addEventListener('click', function(event) {
+        if (event.target && event.target.classList.contains('btn-danger')) {
+            const eventId = event.target.getAttribute('data-id');
                 axios.delete(`/api/event/${eventId}`).then(function(response) {
-                    console.log('Delete successful', response);
+                    alert('Deleted successfully', response);
                     location.href = '/'
                 })
                 .catch(function(error) {
-                    console.log('Error deleting event', error);
+                    alert('Error deleting event: ' + error);
                 });
-            }
-            });
+        }
         });
+    
+    });
