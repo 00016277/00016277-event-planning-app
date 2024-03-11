@@ -13,14 +13,11 @@ body
                     .input-group-text
                         i.fas.fa-calendar-alt
         .mb-3
-            label(for="venue" class="form-label") Venue
-            input(type="text" class="form-control" id="venue" name="venue" required)
+            label(for="eventLocation" class="form-label") Location
+            input(type="text" class="form-control" id="eventLocation" name="eventLocation" required)
         .mb-3
-            label(for="contactPhone" class="form-label") Contact Phone
-            input(type="tel" class="form-control" id="contactPhone" name="contactPhone" required)
-        .mb-3
-            label(for="seat" class="form-label") Seat
-            input(type="text" class="form-control" id="seat" name="seat" required)
+            label(for="description" class="form-label") Description
+            input(type="text" class="form-control" id="description" name="description" required)
         button(type="submit" class="btn btn-success" onclick="submitForm()") #{mode === 'Update' ? 'Update' : 'Add'}
         span &nbsp;
         button(type="submit" class="btn btn-primary" onclick="window.location.href='/'") Back to list
@@ -29,7 +26,7 @@ body
         const format = 'DD/MM/YYYY HH:mm'
         const picker = new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'),{
             localization: {
-            '   locale': 'fr'
+            'locale': 'fr'
             }
         })
         picker.dates.formatInput = function(date) {
@@ -44,18 +41,16 @@ body
                 new tempusDominus.DateTime(moment(eventData.eventDateTime, format))
             );
 
-            document.getElementById('venue').value = eventData.venue || '';
-            document.getElementById('contactPhone').value = eventData.contactPhone || '';
-            document.getElementById('seat').value = eventData.seat || '';
+            document.getElementById('eventLocation').value = eventData.eventLocation || '';
+            document.getElementById('description').value = eventData.description || '';
         }
 
         function submitForm() {
             const eventData = {
                 eventName: document.getElementById('eventName').value,
                 eventDateTime: document.getElementById('eventDateTime').value,
-                venue: document.getElementById('venue').value,
-                contactPhone: document.getElementById('contactPhone').value,
-                seat: document.getElementById('seat').value,
+                eventLocation: document.getElementById('eventLocation').value,
+                description: document.getElementById('description').value,
             };
 
             const url = "#{mode}" === "Update" ? `/api/event/${!{JSON.stringify(eventData || {})}.id}` : '/api/event';

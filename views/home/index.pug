@@ -12,9 +12,8 @@ body
                     th(scope="col") ID
                     th(scope="col") Event Name
                     th(scope="col") Event DateTime
-                    th(scope="col") Venue
-                    th(scope="col") Contact Phone
-                    th(scope="col") Seat
+                    th(scope="col") Location
+                    th(scope="col") Description
                     th(scope="col") Actions
             tbody
 script.
@@ -29,9 +28,8 @@ script.
                     <td>${t.id}</td>
                     <td>${event.eventName}</td>
                     <td>${event.eventDateTime}</td>
-                    <td>${event.venue}</td>
-                    <td>${event.contactPhone}</td>
-                    <td>${event.seat}</td>
+                    <td>${event.eventLocation}</td>
+                    <td>${event.description}</td>
                     <td>
                         <button class="btn btn-primary btn-sm" data-id="${t.id}" onclick="window.location.href='/update/${t.id}'">Update</button>
                         <button class="btn btn-danger btn-sm" data-id="${t.id}">Delete</button>
