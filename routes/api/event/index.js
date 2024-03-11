@@ -14,28 +14,28 @@ router.post('/', addEventValidation(), (req, res)=>{
     
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() });
     }
 
     event_controller.create(req, res)
 })
 
 router.put('/:id', updateEventValidation(), (req, res)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-    event_controller.update(req, res)
+  event_controller.update(req, res)
 })
 
 router.delete('/:id', deleteEventValidation(), (req, res, next)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-    event_controller.delete(req, res)
+  event_controller.delete(req, res)
 })
 
 module.exports = router;

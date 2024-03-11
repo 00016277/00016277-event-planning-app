@@ -17,7 +17,7 @@ const event_controller = {
         if (event) {
             res.json(event)
         } else {
-            res.status(404).send('event not found')
+            res.status(404).send('Event not found')
         }
     },
     delete(req, res) {
